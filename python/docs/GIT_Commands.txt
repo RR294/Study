@@ -1,0 +1,142 @@
+GIT Config Commands
+===================
+
+- For Setting Email, git config --global user.email "aksprince2111@gmail.com"
+- For Setting Username, git config --global user.name "Axit Soni"
+- For Setting Commit Message Editor, git config --global core.editor "vim"
+
+GIT Commands
+============
+
+- For Cloning the Repository
+  git clone https://github.com/axit8041/MyImpData.git
+
+- For Adding File to Local Repository
+  git add <filename>
+
+- For Adding File to Remote Repository
+  Without Signature, git commit <filename>
+  With Signature, git commit -s <filename>
+
+- Push Local branch to Remote branch
+  git push <REMOTE_BRANCH> <LOCAL_BRANCH>
+  	For Example, git push origin master
+  git push -f origin master
+
+- Resetting Hard the branch you are on
+  git reset --hard <commit-id>
+
+- Creating Patches from branch you are on
+  git format-patch -2
+  git format-patch -2 --cover-letter, generates cover letter with 2 patch information
+
+GIT - How to clone a specific branch
+=====================================
+git clone -b "branch_name" https://github.com/Microsoft/openenclave / "remoteURL"
+
+
+GIT Branching Commands
+======================
+
+- Creating New Branch from Exisiting Branch
+  git checkout -b <NEW_BRANCH_NAME> <EXISTING_BRANCH_NAME>
+  Example: git checkout -b change_readme master
+
+- Add new Branch on Remote
+  git push origin change_readme
+  or
+  git push -u origin "branch_name"
+
+- Switch between different branches
+  git checkout master
+  git checkout developer
+
+- Merge developer branch changes to master branch
+  - git checkout master, Check out master branch
+  - git merge --no-ff developer, Merges the changes from developer branch to master branch with no fast forward which gives another merge object number in master branch with user defined message as well
+  - git push origin master, Changes with refelcted to remote
+
+- Delete developer branch once its not necessary
+   - Local Branch:
+     - git branch -d <Local_Branch>
+     - git branch -d developer, Check for merged status
+     - git branch -D developer, No check for merged status with forced delete
+   - Remote Branch:
+     - git push origin --delete <Remote_Branch>
+     - git push origin --delete developer
+	 
+	 
+GIT push to remote
+===================
+git push origin wnd_feature(remote branch where you want to submit)
+
+GIT get latest on master and merge latest changes from master to branch
+=======================================================================
+git checkout master
+git pull origin master
+
+// switch to branch where you want to merge
+git checkout "branch_name"
+
+// this will merge latest from master to "branch_name"
+git merge master
+
+Create a ptach file for uncommited changes
+==========================================
+git diff > mypatch.patch
+
+save uncommitted changes for later use before branch switch
+===========================================================
+git stash
+
+git stash apply 	// to restore stashed changes
+git statsh apply stash@{2} // to resotre specific stash.
+git stash list		// to see list of stash.
+
+https://git-scm.com/book/en/v1/Git-Tools-Stashing
+
+Revert
+==========
+git checkout filename	// to revert uncommited file.
+git checkout .			// Revert all local uncommitted changes (should be executed in repo root):
+git reset -- <file 1> <file 2> <file n> // Undo add files for commit.
+
+
+Remove all the untracked files
+==============================
+git clean -fx
+
+
+Revert uncommited Merge changes
+===============================
+git merge --abort
+
+Add all the modified files
+============================
+git add -u
+
+
+File history
+==============
+git log filepath
+gitk filepath
+
+Remove directory from git and local
+====================================
+git rm -r one-of-the-directories
+git commit -m "Remove duplicated directory"
+git push origin <your-git-branch> (typically 'master', but not always)
+
+Remove a git configuration
+==========================
+# Remove repository configuration
+git config --unset [key]
+# Remove global configuration
+git config --global --unset [key]
+# Remove system configuration
+git config --system --unset [key]
+
+Useful links
+============
+https://www.git-tower.com/learn/git/ebook/en/command-line/remote-repositories/deleting-branches#start
+
