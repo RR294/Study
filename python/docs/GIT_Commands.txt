@@ -1,8 +1,8 @@
 GIT Config Commands
 ===================
 
-- For Setting Email, git config --global user.email "aksprince2111@gmail.com"
-- For Setting Username, git config --global user.name "Axit Soni"
+- For Setting Email, git config --global user.email "rajeshvrathod@gmail.com"
+- For Setting Username, git config --global user.name "Rajesh Rathod"
 - For Setting Commit Message Editor, git config --global core.editor "vim"
 
 GIT Commands
