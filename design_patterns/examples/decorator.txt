@@ -1,0 +1,82 @@
+In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class.
+
+The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
+
+The decorator pattern is structurally nearly identical to the chain of responsibility pattern, the difference being that in a chain of responsibility, exactly one of the classes handles the request, while for the decorator, all classes handle the request.
+
+What problems can the Decorator design pattern solve? 
+=======================================================
+Responsibilities should be added to (and removed from) an object dynamically at run-time.
+A flexible alternative to subclassing for extending functionality should be provided.
+
+
+#include <iostream>
+#include <cstring>
+#include <sstream>
+
+using namespace std;
+// ========================= Dynamic decorator ================================
+struct Shape
+{
+	virtual string str() = 0;
+};
+
+struct Circle : Shape
+{
+	float radius = 10.0f;
+	void resize(float factor) { radius *= factor; }
+	string str() override
+	{
+		std::ostringstream ss;
+		ss << radius;
+		return string("A circle of radius ") + ss.str();
+	}
+};
+
+struct ColoredShape : Shape
+{
+	string color;
+	Shape* shape;
+	ColoredShape(string clr, Shape* shp)
+	{
+		color = clr;
+		shape = shp;
+	}
+	string str() override
+	{
+		return shape->str() + string(" which is coloured ") + color;
+	}
+};
+
+// ===================== Static decorator =====================================
+template <typename T> struct ColoredShape_s : T
+{
+	string color;
+	ColoredShape_s(string clr)
+	{
+		color = clr;
+	}
+	string str()
+	{
+		return T::str() + " which is colored " + color;
+	}
+};
+
+
+// usage:
+int main()
+{
+	// Dynamic decorator usage.
+	Circle c;
+	ColoredShape cc("red", &c);
+	std::cout << c.str() << std::endl;
+	std::cout << cc.str() << std::endl;
+
+	// static decorator usage.
+	ColoredShape_s<Circle> red_circle("red");
+	cout << red_circle.str() << endl;
+	// and this is legal
+	red_circle.resize(1.2);
+	cout << red_circle.str() << endl;
+	return 0;
+}
