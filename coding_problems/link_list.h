@@ -29,4 +29,35 @@ class link_list
 
         std::cout << "NULL \n";
     }
+
+    // Function to get node ptr at given index(0-based index).
+    // if index is valid and found in the linked list then pointer to node will be returned.
+    // if index is invalid or not found in the linked list then it will return nullptr.
+    link_list* get_node(int ind)
+    {
+        if(ind < 0)
+        {
+            return nullptr;
+        }
+
+        if(ind == 0)
+        {
+            return this;
+        }
+
+        link_list* p_tmp = this;
+        int cur_ind(0);
+        while(p_tmp->next != nullptr && cur_ind < ind)
+        {
+            p_tmp = p_tmp->next;
+            ++cur_ind;
+
+            if(cur_ind == ind)
+            {
+                return p_tmp;
+            }
+        }
+
+        return nullptr;
+    }
 };
