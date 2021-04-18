@@ -60,4 +60,18 @@ class link_list
 
         return nullptr;
     }
+
+    // Function returns the length of linked list.
+    int length()
+    {
+        link_list* p_tmp = this;
+        int len(0);
+        while(p_tmp != nullptr)
+        {
+            p_tmp = p_tmp->next;
+            ++len;
+        }
+
+        return len;
+    }
 };
